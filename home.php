@@ -8,9 +8,10 @@ $result = mysqli_query($conn, $sql);
 $board_list = '';
 while($row = mysqli_fetch_array($result)){
     $title = htmlspecialchars($row['title']);
-    $board_list .= "<li><a href='board?id={$row['id']}>{$title}</a></li>";
+    $board_list .= "<li><a href='board?id={$row['id']}'>{$title}</a></li>";
 }
 ?>
+
 <div>
     <h2>board</h2>
     <ol>
