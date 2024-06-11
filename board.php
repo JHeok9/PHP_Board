@@ -13,7 +13,7 @@ $button = '';
 if(isset($_GET['id'])){
     $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
 
-    $sql = "select * from board b left join user u on b.create_user_id = u.id where b.id = {$filtered_id}";
+    $sql = "select b.*, u.name from board b left join user u on b.create_user_id = u.id where b.id = {$filtered_id}";
     $result = mysqli_query($conn, $sql);
 
     $row = mysqli_fetch_array($result);
