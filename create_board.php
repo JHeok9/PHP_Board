@@ -17,6 +17,7 @@ require_once "head.php";
             </tr>
             <tr>
                 <td>
+                    <input type="hidden" name="create_user_id" value="<?=$_SESSION['user_id']?>">
                     <input type="submit" value="게시">
                 </td>
             </tr>

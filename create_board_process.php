@@ -7,7 +7,7 @@ $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 $filtered = array(
     'title' => mysqli_real_escape_string($conn, $_POST['title']),
     'content' => mysqli_real_escape_string($conn, $_POST['content']),
-    'create_user_id' => mysqli_real_escape_string($conn, $_SESSION['user_id'])
+    'create_user_id' => mysqli_real_escape_string($conn, $_POST['create_user_id'])
 );
 
 // 게시글 등록
