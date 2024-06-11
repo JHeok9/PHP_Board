@@ -8,26 +8,30 @@ $action_url = 'create_board_process.php';
 $submit_value = '게시';
 
 $board = array(
+    'id' => '',
     'title' => '',
     'content' => '',
     'create_user_id' => ''
 );
 
-if(isset($_GET['id']) && $_GET['id'] == $_SESSION['user_id']){
-    $action_url = "update_board_process.php";
-    $submit_value = '수정';
-
+// 수정접근시 board_id
+if(isset($_GET['id'])){
     settype($_GET['id'], 'integer');
     $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
     $sql = "select * from board where id = {$filtered_id}";
 
     $result = mysqli_query($conn, $sql);
-
     $row =  mysqli_fetch_array($result);
-    $board['title'] = htmlspecialchars($row['title']);
-    $board['content'] = htmlspecialchars($row['content']);
-    $board['create_user_id'] = htmlspecialchars($row['create_user_id']);
 
+    if($row['create_user_id'] == $_SESSION['user_id']){
+        $action_url = "update_board_process.php";
+        $submit_value = '수정';
+    
+        $board['id'] = htmlspecialchars($row['id']);
+        $board['title'] = htmlspecialchars($row['title']);
+        $board['content'] = htmlspecialchars($row['content']);
+        $board['create_user_id'] = htmlspecialchars($row['create_user_id']);
+    }
 }
 ?>
 
@@ -46,6 +50,7 @@ if(isset($_GET['id']) && $_GET['id'] == $_SESSION['user_id']){
             </tr>
             <tr>
                 <td>
+                    <input type="hidden" name="id" value="<?=$board['id']?>">
                     <input type="hidden" name="create_user_id" value="<?=$_SESSION['user_id']?>">
                     <input type="submit" value=<?=$submit_value?>>
                 </td>
