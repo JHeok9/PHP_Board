@@ -20,8 +20,8 @@ if(isset($_GET['id'])){
     $board['content'] = htmlspecialchars($row['content']);
 
     if($row['create_user_id'] == $_SESSION['user_id']){
-        $button = "<a href='board_update.php?id={$row['id']}'><button>수정</button></a>";
-        $button .= '<form action="board_delete_procces" method="post"><input type="hidden" name="id" value="'.$row['id'].'"><input type="submit" value="삭제"></form>';
+        $button = "<a href='update_board.php?id={$row['id']}'><button>수정</button></a>";
+        $button .= '<form action="delete_board_process.php" method="post"><input type="hidden" name="id" value="'.$row['id'].'"><input type="submit" value="삭제"></form>';
     }
 }
 ?>
