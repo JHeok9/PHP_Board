@@ -4,7 +4,8 @@ $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 
 $board = array(
     'title' => 'hi',
-    'content' => 'hi'
+    'content' => 'hi',
+    'create_user_id' =>  'hi'
 );
 
 $button = '';
@@ -12,12 +13,13 @@ $button = '';
 if(isset($_GET['id'])){
     $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
 
-    $sql = "select * from board where id = {$filtered_id}";
+    $sql = "select * from board b left join user u on b.create_user_id = u.id where b.id = {$filtered_id}";
     $result = mysqli_query($conn, $sql);
 
     $row = mysqli_fetch_array($result);
     $board['title'] = htmlspecialchars($row['title']);
     $board['content'] = htmlspecialchars($row['content']);
+    $board['name'] = htmlspecialchars($row['name']);
 
     if($row['create_user_id'] == $_SESSION['user_id']){
         $button = "<a href='update_board.php?id={$row['id']}'><button>수정</button></a>";
@@ -27,12 +29,15 @@ if(isset($_GET['id'])){
 ?>
 
 <div>
-    <table>
+    <table border="1">
         <tr>
-            <td><?=$board['title']?></td>
+            <td>제목</td><td><?=$board['title']?></td>
         </tr>
         <tr>
-            <td><?=$board['content']?></td>
+            <td>내용</td><td><?=$board['content']?></td>
+        </tr>
+        <tr>
+            <td>작성자</td><td><?=$board['name']?></td>
         </tr>
     </table>
     <a href="home.php"><button>목록</button></a>

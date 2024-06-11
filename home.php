@@ -17,7 +17,7 @@ while($row = mysqli_fetch_array($result)){
     <ol>
         <?=$board_list?>
     </ol>
-    <a href="create_board.php"><button>글작성</button></a>
+    <a href="write_board.php"><button>글작성</button></a>
 </div>
 <?php
 require_once "footer.php";
