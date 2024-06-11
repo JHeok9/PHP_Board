@@ -15,7 +15,7 @@ try{
     // 로그인 시도
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
-    if($row['name'] == $filtered['name'] && $row['password'] == $filtered['password']){
+    if(!empty($_POST['name']) && $row['name'] == $filtered['name'] && $row['password'] == $filtered['password']){
         // 로그인 성공
         $_SESSION['user_id'] = $row['id']; // 세션에 유저 ID 저장
         header("Location: home.php");
