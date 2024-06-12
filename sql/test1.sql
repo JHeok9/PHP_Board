@@ -6,6 +6,8 @@ select * from user where name = 'bbb' and password = 'bbb';
 
 select * from board;
 
+update board set views = views + 1 where id = 1 ;
+
 select count(*) as count from board;
 
 select * from board where id = 1;

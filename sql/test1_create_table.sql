@@ -2,14 +2,16 @@ use test1;
 drop table user;
 drop table board;
 drop table reply;
+drop table board_file;
 
 -- 테이블 생성 SQL - user
 CREATE TABLE user
 (
-    `id`        INT(11)        NOT NULL    AUTO_INCREMENT COMMENT '회원 ID', 
-    `name`      VARCHAR(50)    NOT NULL    COMMENT '회원 아이디', 
-    `password`  VARCHAR(50)    NOT NULL    COMMENT '회원 비밀번호', 
-    `nickname`  VARCHAR(50)    NOT NULL    COMMENT '회원 이름', 
+    `id`            INT(11)        NOT NULL    AUTO_INCREMENT COMMENT '회원 ID', 
+    `name`          VARCHAR(50)    NOT NULL    COMMENT '회원 아이디', 
+    `password`      VARCHAR(50)    NOT NULL    COMMENT '회원 비밀번호', 
+    `nickname`      VARCHAR(50)    NOT NULL    COMMENT '회원 이름', 
+    `user_created`  DATETIME       NOT NULL    COMMENT '가입일', 
     CONSTRAINT PK_member PRIMARY KEY (id)
 );
 
@@ -20,14 +22,14 @@ ALTER TABLE user COMMENT '회원';
 -- 테이블 생성 SQL - board
 CREATE TABLE board
 (
-    `board_id`        INT(11)         NOT NULL    AUTO_INCREMENT COMMENT '게시글 ID', 
-    `title`           VARCHAR(255)    NOT NULL    COMMENT '게시글 제목', 
-    `content`         TEXT            NULL        COMMENT '게시글 내용', 
-    `created`         DATETIME        NOT NULL    COMMENT '작성일', 
-    `views`           INT(11)         NOT NULL    COMMENT '조회수', 
-    `updated`         DATETIME        NULL        COMMENT '수정일', 
-    `create_user_id`  INT(11)         NOT NULL    COMMENT '게시글 작성자', 
-    CONSTRAINT PK_board PRIMARY KEY (board_id)
+    `id`             INT(11)         NOT NULL    AUTO_INCREMENT COMMENT '게시글 ID', 
+    `title`          VARCHAR(255)    NOT NULL    COMMENT '게시글 제목', 
+    `content`        TEXT            NULL        COMMENT '게시글 내용', 
+    `board_created`  DATETIME        NOT NULL    COMMENT '작성일', 
+    `views`          INT(11)         NOT NULL    COMMENT '조회수', 
+    `board_updated`  DATETIME        NULL        COMMENT '수정일', 
+    `write_user_id`  INT(11)         NOT NULL    COMMENT '게시글 작성자', 
+    CONSTRAINT PK_board PRIMARY KEY (id)
 );
 
 -- 테이블 Comment 설정 SQL - board
@@ -50,11 +52,11 @@ ALTER TABLE board
 CREATE TABLE reply
 (
     `id`              INT(11)     NOT NULL    AUTO_INCREMENT COMMENT '댓글 ID', 
-    `member_id`       INT(11)     NOT NULL    COMMENT '회원 ID. 비회원 댓글 가능', 
+    `reply_user_id`   INT(11)     NOT NULL    COMMENT '회원 ID. 비회원 댓글 가능', 
     `board_id`        INT(11)     NOT NULL    COMMENT '게시글 ID', 
-    `is_reply_to_id`  INT(11)     NOT NULL    COMMENT '원본 댓글 아이디', 
+    `is_reply_to_id`  INT(11)     COMMENT '원본 댓글 아이디', 
     `content`         TEXT        NOT NULL    COMMENT '댓글 내용', 
-    `reg_date`        DATETIME    NOT NULL    COMMENT '등록일', 
+    `reply_created`   DATETIME    NOT NULL    COMMENT '등록일', 
     CONSTRAINT PK_board_comment PRIMARY KEY (id)
 );
 
@@ -83,11 +85,11 @@ ALTER TABLE reply
 -- 테이블 생성 SQL - board_file
 CREATE TABLE board_file
 (
-    `file_id`    INT(11)         NOT NULL    AUTO_INCREMENT COMMENT '파일 ID. 회원 아이디', 
-    `board_id`   INT(11)         NOT NULL    COMMENT '게시글 ID', 
-    `file_name`  VARCHAR(255)    NOT NULL    COMMENT '파일 이름', 
-    `reg_date`   DATETIME        NOT NULL    COMMENT '등록일', 
-    CONSTRAINT PK_board_file PRIMARY KEY (file_id)
+    `id`            INT(11)         NOT NULL    AUTO_INCREMENT COMMENT '파일 ID. 회원 아이디', 
+    `board_id`      INT(11)         NOT NULL    COMMENT '게시글 ID', 
+    `file_name`     VARCHAR(255)    NOT NULL    COMMENT '파일 이름', 
+    `file_created`  DATETIME        NOT NULL    COMMENT '등록일', 
+    CONSTRAINT PK_board_file PRIMARY KEY (id)
 );
 
 -- 테이블 Comment 설정 SQL - board_file
