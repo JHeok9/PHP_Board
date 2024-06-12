@@ -2,12 +2,14 @@
 $upload_dir = "boardFile/"; // 업로드 경로
 
 // 파일명 검증 및 정리
-if (!isset($_GET['uuid'])) {
-    die("파일명이 제공되지 않았습니다.");
+if (!isset($_GET['uuid']) || !isset($_GET['file_name'])) {
+    die("파일 정보가 제공되지 않았습니다.");
 }
 
-$file_name = basename($_GET['uuid']); // basename()을 사용하여 디렉토리 트래버설 공격 방지
-$file_path = $upload_dir . $file_name;
+$file_uuid = basename($_GET['uuid']); // UUID의 경로 조작 방지
+$file_name = basename($_GET['file_name']); // 원본 파일명
+
+$file_path = $upload_dir . $file_uuid;
 
 if (!file_exists($file_path)) {
     die("파일이 존재하지 않습니다.");
@@ -24,7 +26,7 @@ if (!in_array(strtolower($file_info['extension']), $allowed_extensions)) {
 
 // 파일 다운로드
 header("Content-Type: application/octet-stream");
-header("Content-Disposition: attachment; filename=\"" . $file_info['basename'] . "\"");
+header("Content-Disposition: attachment; filename=\"" . $file_name . "\"");
 header("Content-Transfer-Encoding: binary");
 header("Content-Length: " . $file_size);
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
