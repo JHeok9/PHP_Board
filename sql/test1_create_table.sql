@@ -86,6 +86,7 @@ ALTER TABLE reply
 CREATE TABLE board_file
 (
     `id`            INT(11)         NOT NULL    AUTO_INCREMENT COMMENT '파일 ID. 회원 아이디', 
+    `uuid`			varchar(255)	NOT NULL	COMMENT '파일 식별 ID',
     `board_id`      INT(11)         NOT NULL    COMMENT '게시글 ID', 
     `file_name`     VARCHAR(255)    NOT NULL    COMMENT '파일 이름', 
     `file_created`  DATETIME        NOT NULL    COMMENT '등록일', 
