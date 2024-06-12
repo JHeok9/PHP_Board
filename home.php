@@ -16,7 +16,7 @@ $start = ($page - 1) * $list_num;
 // 전체 페이지 수 계산
 $total_page = ceil($board_count / $list_num);
 
-$sql = "select b.*, u.name from board b left join user u on b.create_user_id = u.id limit $start, $list_num";
+$sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id limit $start, $list_num";
 $result = mysqli_query($conn, $sql);
 
 // 페이지 번호 링크 생성
@@ -44,16 +44,18 @@ $board_list = '';
 while($row = mysqli_fetch_array($result)){
     $board = array(
         'id' => htmlspecialchars($row['id']),
-        'name' => htmlspecialchars($row['name']),
+        'nickname' => htmlspecialchars($row['nickname']),
         'title' => htmlspecialchars($row['title']),
-        'created' => htmlspecialchars($row['created']),
+        'board_created' => htmlspecialchars($row['board_created']),
+        'views' => htmlspecialchars($row['views'])
     );
 
     $board_list .= "<tr>";
     $board_list .= "<td>{$board['id']}</td>";
-    $board_list .= "<td>{$board['name']}</td>";
+    $board_list .= "<td>{$board['nickname']}</td>";
     $board_list .= "<td><a href='board.php?id={$board['id']}'>{$board['title']}</a></td>";
-    $board_list .= "<td>{$board['created']}</td>";
+    $board_list .= "<td>{$board['board_created']}</td>";
+    $board_list .= "<td>{$board['views']}</td>";
     $board_list .= "</tr>";
 }
 ?>
@@ -67,6 +69,7 @@ while($row = mysqli_fetch_array($result)){
                 <th>작성자</th>
                 <th>내용</th>
                 <th>게시일</th>
+                <th>조회수</th>
             </tr>
         </thead>
         <tbody>

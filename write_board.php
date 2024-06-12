@@ -11,7 +11,7 @@ $board = array(
     'id' => '',
     'title' => '',
     'content' => '',
-    'create_user_id' => ''
+    'write_user_id' => ''
 );
 
 // 수정접근시 board_id
@@ -23,14 +23,14 @@ if(isset($_GET['id'])){
     $result = mysqli_query($conn, $sql);
     $row =  mysqli_fetch_array($result);
 
-    if($row['create_user_id'] == $_SESSION['user_id']){
+    if($row['write_user_id'] == $_SESSION['user_id']){
         $action_url = "update_board_process.php";
         $submit_value = '수정';
     
         $board['id'] = htmlspecialchars($row['id']);
         $board['title'] = htmlspecialchars($row['title']);
         $board['content'] = htmlspecialchars($row['content']);
-        $board['create_user_id'] = htmlspecialchars($row['create_user_id']);
+        $board['write_user_id'] = htmlspecialchars($row['write_user_id']);
     }
 }
 ?>
@@ -51,7 +51,7 @@ if(isset($_GET['id'])){
             <tr>
                 <td>
                     <input type="hidden" name="id" value="<?=$board['id']?>">
-                    <input type="hidden" name="create_user_id" value="<?=$_SESSION['user_id']?>">
+                    <input type="hidden" name="write_user_id" value="<?=$_SESSION['user_id']?>">
                     <input type="submit" value=<?=$submit_value?>>
                 </td>
             </tr>

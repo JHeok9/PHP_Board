@@ -12,7 +12,7 @@ $filtered = array(
 
 // 게시글 수정
 try{
-    $sql = "update board set title = '{$filtered['title']}', content = '{$filtered['content']}' where id = {$filtered['id']}";
+    $sql = "update board set title = '{$filtered['title']}', content = '{$filtered['content']}', board_updated = NOW() where id = {$filtered['id']}";
     // 게시글 수정 시도
     $result = mysqli_query($conn, $sql);
     if ($result === false) {

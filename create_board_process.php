@@ -7,13 +7,13 @@ $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 $filtered = array(
     'title' => mysqli_real_escape_string($conn, $_POST['title']),
     'content' => mysqli_real_escape_string($conn, $_POST['content']),
-    'create_user_id' => mysqli_real_escape_string($conn, $_POST['create_user_id'])
+    'write_user_id' => mysqli_real_escape_string($conn, $_POST['write_user_id'])
 );
 
 // 게시글 등록
 try{
-    $sql = "insert into board(title, content, created, create_user_id) 
-            values('{$filtered['title']}','{$filtered['content']}', NOW(), '{$filtered['create_user_id']}')";
+    $sql = "insert into board(title, content, board_created, write_user_id, views) 
+            values('{$filtered['title']}','{$filtered['content']}', NOW(), '{$filtered['write_user_id']}', 0)";
     // 게시글 등록 시도
     $result = mysqli_query($conn, $sql);
     if ($result === false) {
