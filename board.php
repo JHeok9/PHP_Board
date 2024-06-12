@@ -36,6 +36,17 @@ if(isset($_GET['id'])){
     }
 }
 
+// 업로드 파일 가져오기
+$board_file = array();
+$sql = "select * from board_file where board_id = {$filtered_id}";
+$result = mysqli_query($conn, $sql);
+if(isset($result)){
+    $row = mysqli_fetch_array($result);
+    $board_file['id'] = htmlspecialchars($row['id']);
+    $board_file['uuid'] = htmlspecialchars($row['uuid']);
+    $board_file['file_name'] = htmlspecialchars($row['file_name']);
+}
+
 $reply = '';
 // 댓글 가져오기
 $sql = "select r.*, u.nickname 
@@ -57,19 +68,28 @@ while($row = mysqli_fetch_array($result)){
 <div>
     <table border="1">
         <tr>
-            <td>제목</td><td><?=$board['title']?></td>
+            <td>제목</td>
+            <td><?=$board['title']?></td>
         </tr>
         <tr>
-            <td>작성자</td><td><?=$board['nickname']?></td>
+            <td>작성자</td>
+            <td><?=$board['nickname']?></td>
         </tr>
         <tr>
-            <td>게시일</td><td><?=$board['board_created']?></td>
+            <td>게시일</td>
+            <td><?=$board['board_created']?></td>
         </tr>
         <tr>
-            <td>조회수</td><td><?=$board['views']?></td>
+            <td>조회수</td>
+            <td><?=$board['views']?></td>
         </tr>
         <tr>
-            <td>내용</td><td><?=$board['content']?></td>
+            <td>내용</td>
+            <td><?=$board['content']?></td>
+        </tr>
+        <tr>
+            <td>첨부파일</td>
+            <td><a href="file_download.php?id=<?=$board_file['id']?>"><?=$board_file['file_name']?></a></td>
         </tr>
     </table>
     <br><br>
