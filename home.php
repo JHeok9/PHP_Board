@@ -16,7 +16,7 @@ $start = ($page - 1) * $list_num;
 // 전체 페이지 수 계산
 $total_page = ceil($board_count / $list_num);
 
-$sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id limit $start, $list_num";
+$sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id order by board_created desc limit $start, $list_num";
 $result = mysqli_query($conn, $sql);
 
 // 페이지 번호 링크 생성
