@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *"); // 외부 도메인 접근 허용
 header('Content-Type: application/json'); // 응답 헤더를 JSON 형식으로 설정
 
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
