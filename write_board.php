@@ -36,7 +36,7 @@ if(isset($_GET['id'])){
 ?>
 
 <div>
-    <form action=<?=$action_url?> method="post">
+    <form action=<?=$action_url?> method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>
@@ -46,6 +46,11 @@ if(isset($_GET['id'])){
             <tr>
                 <td>
                     <textarea name="content" placeholder="내용"><?=$board['content']?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="file" name="upload_file">
                 </td>
             </tr>
             <tr>
