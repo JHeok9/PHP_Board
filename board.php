@@ -40,11 +40,16 @@ if(isset($_GET['id'])){
 $board_file = array();
 $sql = "select * from board_file where board_id = {$filtered_id}";
 $result = mysqli_query($conn, $sql);
-if(isset($result)){
+if ($result !== false && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_array($result);
     $board_file['id'] = htmlspecialchars($row['id']);
     $board_file['uuid'] = htmlspecialchars($row['uuid']);
     $board_file['file_name'] = htmlspecialchars($row['file_name']);
+} else {
+    // 파일이 없을 때 처리
+    $board_file['id'] = null;
+    $board_file['uuid'] = null;
+    $board_file['file_name'] = null;
 }
 
 $reply = '';
@@ -89,7 +94,7 @@ while($row = mysqli_fetch_array($result)){
         </tr>
         <tr>
             <td>첨부파일</td>
-            <td><a href="file_download.php?uuid=<?=$board_file['uuid']?>"><?=$board_file['file_name']?></a></td>
+            <td><a href="file_download.php?uuid=<?=$board_file['uuid']?>&file_name=<?=$board_file['file_name']?>"><?=$board_file['file_name']?></a></td>
         </tr>
     </table>
     <br><br>
