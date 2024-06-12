@@ -11,8 +11,8 @@ $filtered = array(
 
 // 회원가입
 try{
-    $sql = "insert into user(name, password, nickname) 
-            values('{$filtered['name']}','{$filtered['password']}','{$filtered['nickname']}')";
+    $sql = "insert into user(name, password, nickname, user_created) 
+            values('{$filtered['name']}','{$filtered['password']}','{$filtered['nickname']}', NOW())";
     // 회원가입 시도
     $result = mysqli_query($conn, $sql);
     
