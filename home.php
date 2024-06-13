@@ -2,9 +2,21 @@
 require_once "head.php";
 
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
+$filtered_search = '';
 
-// 게시글 페이징처리
-$sql = "select count(*) as count from board";
+// 페이징처리
+if(isset($_GET['category']) && !empty($_GET['search'])){ // 검색시 게시글 카운트
+    $filtered_search = mysqli_real_escape_string($conn, $_GET['search']);
+    if($_GET['category'] == 'title'){
+        $sql = "select count(*) as count from board where title like '%$filtered_search%'";
+    }else{
+        
+        $sql = "select count(*) as count from board b left join user u on b.write_user_id = u.id where u.nickname like '%$$filtered_search%'";
+    }
+}else{ // 전체게시글 카운트
+    $sql = "select count(*) as count from board";
+}
+
 $result = mysqli_query($conn, $sql);
 $board_count = mysqli_fetch_array($result)['count'];
 
@@ -16,7 +28,27 @@ $start = ($page - 1) * $list_num;
 // 전체 페이지 수 계산
 $total_page = ceil($board_count / $list_num);
 
-$sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id order by board_created desc limit $start, $list_num";
+// 게시글 리스트 가져오기
+if(isset($_GET['category']) && !empty($_GET['search'])){ // 검색시
+    if($_GET['category'] == 'title'){
+        $sql = "select b.*, u.nickname 
+                  from board b left join user u 
+                    on b.write_user_id = u.id 
+                 where title like '%$filtered_search%'
+                order by board_created desc 
+                 limit $start, $list_num";
+    }else{
+        $sql = "select b.*, u.nickname 
+                  from board b left join user u 
+                    on b.write_user_id = u.id 
+                 where u.nickname like '%$filtered_search%'
+                order by board_created desc 
+                 limit $start, $list_num";
+    }
+}else{ 
+    $sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id order by board_created desc limit $start, $list_num";
+}
+
 $result = mysqli_query($conn, $sql);
 
 // 페이지 번호 링크 생성
@@ -61,13 +93,28 @@ while($row = mysqli_fetch_array($result)){
 ?>
 
 <div>
-    <h2>board</h2>
+    <h2><a href="home.php">board</a></h2>
+
+     <!-- 검색 -->
+    <form action="home.php">
+        <table>
+            <tr>
+                <select name="category">
+                    <option value="title">제목</option>
+                    <option value="nickname">작성자</option>
+                </select>
+                <input type="text" name="search">
+                <input type="submit" value="검색">
+            </tr>
+        </table>
+    </form>
+    
     <table border="1">
         <thead>
             <tr>
                 <th>번호</th>
                 <th>작성자</th>
-                <th>내용</th>
+                <th>제목</th>
                 <th>게시일</th>
                 <th>조회수</th>
             </tr>
