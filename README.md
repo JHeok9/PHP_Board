@@ -5,14 +5,17 @@
 
 
 ### 파일 설명
+#### 로그인
 - index.php : 로그인 페이지
 - login_process.php : 로그인
+- log.php : 접속로그등록
 
 
+#### 회원가입
 - create_user.php : 회원가입 페이지
 - create_user_process.php : 회원가입
 
-  
+#### 게시글
 - home.php : 게시글 리스트 페이지
 - board.php : 게시글 상세보기 페이지
 
@@ -25,3 +28,6 @@
 
 - create_board_reply_process.php : 댓글 작성
 - file_download.php : 첨부파일 다운로드
+
+  #### 관리자 admin/
+  - dashboard : 일별 접속로그
