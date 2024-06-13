@@ -31,8 +31,9 @@ if(isset($_GET['id'])){
     $board['views'] = htmlspecialchars($row['views']);
 
     if($row['write_user_id'] == $_SESSION['user_id']){
-        $button = "<a href='write_board.php?id={$filtered_id}'><button>수정</button></a>";
-        $button .= '<form action="delete_board_process.php" method="post"><input type="hidden" name="id" value="'.$row['id'].'"><input type="submit" value="삭제"></form>';
+        $button = "<a href='write_board.php?id={$filtered_id}' class='btn btn-outline-secondary'>modify</a>";
+        $button .= "<a href='delete_board_process.php?id={$filtered_id}' class='btn btn-outline-secondary' onclick='return confirm(\"삭제하시겠습니까?\")'>delete</a>";
+        // $button .= '<form action="delete_board_process.php" method="post"><input type="hidden" name="id" value="'.$row['id'].'"><input type="submit" class="btn btn-outline-secondary" value="delete"></form>';
     }
 }
 
@@ -71,7 +72,8 @@ while($row = mysqli_fetch_array($result)){
 ?>
 
 <div>
-    <table border="1">
+    <h2><a href="home.php">board</a></h2>
+    <table class="table">
         <tr>
             <td>제목</td>
             <td><?=$board['title']?></td>
@@ -111,9 +113,7 @@ while($row = mysqli_fetch_array($result)){
         <?=$reply?>
     </table>
 
-    <br><br>
-    <a href="home.php"><button>목록</button></a><br>
-    <?=$button?>
+    <a href="home.php" class="btn btn-outline-secondary">list</a><?=$button?>
 </div>
 
 <?php

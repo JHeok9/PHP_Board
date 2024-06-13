@@ -38,28 +38,20 @@ if(isset($_GET['id'])){
 <div>
     <form action=<?=$action_url?> method="post" enctype="multipart/form-data">
         <table>
-            <tr>
-                <td>
-                    <input type="text" name="title" placeholder="제목" value="<?=$board['title']?>">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <textarea name="content" placeholder="내용"><?=$board['content']?></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="file" name="upload_file">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="hidden" name="id" value="<?=$board['id']?>">
-                    <input type="hidden" name="write_user_id" value="<?=$_SESSION['user_id']?>">
-                    <input type="submit" value=<?=$submit_value?>>
-                </td>
-            </tr>
+            <div class="mb-3">
+                <input class="form-control" type="text" name="title" placeholder="제목" value="<?=$board['title']?>">
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" name="content" placeholder="내용"><?=$board['content']?></textarea>
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="file" name="upload_file">
+            </div>
+            <div class="mb-3">
+                <input type="hidden" name="id" value="<?=$board['id']?>">
+                <input type="hidden" name="write_user_id" value="<?=$_SESSION['user_id']?>">
+                <input type="submit" class="btn btn-primary btn-xs" value=<?=$submit_value?>>
+            </div>
         </table>
     </form>
 </div>
