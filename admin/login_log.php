@@ -25,13 +25,10 @@ while($row = mysqli_fetch_assoc($result)) {
         <div class="main_content">
             <!--Content-->
             <div class="tb_row td_center">
-                <caption>회원 유형별 접속 현황</caption>
+                <caption>로그인 정보</caption>
                 <table class="table table-striped">
                     <colgroup>
                         <col width="5%">
-                        <col width="">
-                        <col width="">
-                        <col width="">
                         <col width="">
                         <col width="">
                     </colgroup>

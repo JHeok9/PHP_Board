@@ -2,20 +2,17 @@
 require_once "include/header.php";
 
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
-$sql = "select * from access_log";
+$sql = "select * from user";
 
 $result = mysqli_query($conn, $sql);
-$logs = array();
 
 $html = '';
 while($row = mysqli_fetch_assoc($result)) {
     $html .= "<tr>";
     $html .= "<td>{$row['id']}</td>";
-    $html .= "<td>{$row['access_ip']}</td>";
-    $html .= "<td>{$row['access_time']}</td>";
-    $html .= "<td>{$row['access_browser']}</td>";
-    $html .= "<td>{$row['access_os']}</td>";
-    $html .= "<td>{$row['access_route']}</td>";
+    $html .= "<td>{$row['name']}</td>";
+    $html .= "<td>{$row['nickname']}</td>";
+    $html .= "<td>{$row['user_created']}</td>";
     $html .= "</tr>";
 }
 
@@ -28,24 +25,20 @@ while($row = mysqli_fetch_assoc($result)) {
         <div class="main_content">
             <!--Content-->
             <div class="tb_row td_center">
-                <caption>접속 정보</caption>
+                <caption>유저 정보</caption>
                 <table class="table table-striped">
                     <colgroup>
                         <col width="5%">
                         <col width="">
                         <col width="">
                         <col width="">
-                        <col width="">
-                        <col width="">
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>번호</th>
-                            <th>접속IP</th>
-                            <th>접속일</th>
-                            <th>브라우저</th>
-                            <th>운영체제</th>
-                            <th>접근 경로</th>
+                            <th>회원번호</th>
+                            <th>회원ID</th>
+                            <th>회원이름</th>
+                            <th>가입일</th>
                         </tr>
                     </thead>
                     <tbody id="log_list">

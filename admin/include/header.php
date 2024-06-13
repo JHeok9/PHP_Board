@@ -13,8 +13,9 @@
 <body>
     <div>
         <h2>
-            <a href="dashboard.php">dashboard</a>
-            <a href="access_log.php">access_log</a>
-            <a href="login_log.php">login_log</a>
+            <a href="dashboard.php">일별접속차트</a>
+            <a href="user_list.php">유저정보</a>
+            <a href="access_log.php">접속정보</a>
+            <a href="login_log.php">로그인정보</a>
         </h2>
     </div>
