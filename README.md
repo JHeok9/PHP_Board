@@ -24,4 +24,7 @@
 - file_download.php : 첨부파일 다운로드
 
 #### 관리자 admin
-- dashboard : 일별 접속로그
+- dashboard.php : 최근 10일 접속차트
+- user_list.php : 유저정보
+- access_log.php : 접속정보(index.php 접근시)
+- login_log.php : 로그인정보
