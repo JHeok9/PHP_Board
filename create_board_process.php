@@ -74,7 +74,7 @@ try{
             throw new Exception("지원하지 않는 파일 형식입니다. jpg, jpeg, png, gif 파일만 허용됩니다.");
         }
     }
-
+    header("Location: home.php");
 } catch(Exception $e){
      // 트랜잭션 롤백
      mysqli_rollback($conn);
