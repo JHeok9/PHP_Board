@@ -3,6 +3,8 @@ drop table user;
 drop table board;
 drop table reply;
 drop table board_file;
+drop table access_log;
+drop table login_log;
 
 -- 테이블 생성 SQL - user
 CREATE TABLE user
@@ -104,3 +106,26 @@ ALTER TABLE board_file
 -- Foreign Key 삭제 SQL - board_file(board_id)
 -- ALTER TABLE board_file
 -- DROP FOREIGN KEY FK_board_file_board_id_board_board_id;
+
+
+-- 테이블 생성 SQL - access_log
+CREATE TABLE access_log
+(
+    `id`              INT(11)         NOT NULL    AUTO_INCREMENT COMMENT '로그 ID', 
+    `access_ip`       VARCHAR(255)    NOT NULL    COMMENT '접속 IP', 
+    `access_time`     DATETIME		  NOT NULL    COMMENT '접속 시간', 
+    `access_browser`  VARCHAR(255)    NULL        COMMENT '브라우저', 
+    `access_os`       VARCHAR(255)    NULL        COMMENT '운영체제', 
+    `access_route`    VARCHAR(255)    NULL        COMMENT '접근 경로', 
+     PRIMARY KEY (id)
+);
+
+
+
+-- 로그인 로그 테이블 생성 - login_log
+create table login_log(
+	`id` int(11) auto_increment primary key comment '로그 id',
+    `login_id` int(11) not null comment '로그인 유저 id',
+    `login_ip` varchar(255) not null comment '로그인 ip',
+    `login_time` datetime not null comment '로그인 시간'
+);
