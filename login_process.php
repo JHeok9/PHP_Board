@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "log.php";
 // DB연결
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 
@@ -18,6 +19,7 @@ try{
     if(!empty($_POST['name']) && $row['name'] == $filtered['name'] && $row['password'] == $filtered['password']){
         // 로그인 성공
         $_SESSION['user_id'] = $row['id']; // 세션에 유저 ID 저장
+        login_log($row['id']);
         header("Location: home.php");
         exit();
     }else{
