@@ -34,7 +34,7 @@ while($row = mysqli_fetch_assoc($result)) {
         
         <!--일별 접속자 현황-->
         <div class="line_charts">
-          <canvas id="chart"></canvas>
+          <canvas id="chart" style="height: 500px;"></canvas>
         </div>
         
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
