@@ -1,4 +1,5 @@
 <?php
+require_once "include/header.php";
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 $sql = "SELECT DATE_FORMAT(d.date_range, '%Y-%m-%d') AS log_date,
                COALESCE(COUNT(a.id), 0) AS total_logins
@@ -21,18 +22,6 @@ while($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-<!doctype html>
-<html lang="ko">
-<head>
-<!-- Basic Style -->
-<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
-    
-<!-- Basic Js -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="../js/common.js" charset="utf-8"></script>
-</head>
-<body>
 <!-- Wrap -->
 <div id="wrap">  
 	<!-- Container -->
