@@ -9,7 +9,7 @@ require_once "head.php";
         <form action="login_process.php" method="post">
             <!-- 로그인 페이지 타이틀 -->
             <div id="loginBoxTitle">Login</div>
-            <!-- 아이디, 비번, 버튼 박스 -->
+                <!-- 아이디, 비번, 버튼 박스 -->
                 <div id="inputBox">
                     <div class="input-form-box"><span>아이디 </span><input type="text" name="name" class="form-control"></div>
                     <div class="input-form-box"><span>비밀번호 </span><input type="password" name="password" class="form-control"></div>
@@ -18,6 +18,7 @@ require_once "head.php";
                 </div>
             </div>
         </form>
+        <a href="create_user.php">회원가입</a>
     </div>
 </div>
 
