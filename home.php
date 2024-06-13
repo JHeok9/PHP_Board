@@ -97,26 +97,26 @@ while($row = mysqli_fetch_array($result)){
 
      <!-- 검색 -->
     <form action="home.php">
-        <table>
-            <tr>
+        <div class="input-group">
+            <div class="form-outline">
                 <select name="category">
                     <option value="title">제목</option>
                     <option value="nickname">작성자</option>
                 </select>
                 <input type="text" name="search">
-                <input type="submit" value="검색">
-            </tr>
-        </table>
+            </div>
+            <button type="submit" class="btn btn-primary">검색</button>
+        </div>
     </form>
     
-    <table border="1">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>번호</th>
-                <th>작성자</th>
-                <th>제목</th>
-                <th>게시일</th>
-                <th>조회수</th>
+                <th scope="col">번호</th>
+                <th scope="col">작성자</th>
+                <th scope="col">제목</th>
+                <th scope="col">게시일</th>
+                <th scope="col">조회수</th>
             </tr>
         </thead>
         <tbody>
@@ -128,7 +128,7 @@ while($row = mysqli_fetch_array($result)){
         <?=$page_list?>
     </div>
 
-    <a href="write_board.php"><button>글작성</button></a>
+    <a href="write_board.php"><button class="btn btn-primary">글작성</button></a>
 </div>
 <?php
 require_once "footer.php";

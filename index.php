@@ -2,29 +2,23 @@
 require_once "head.php";
 ?>
 
-<div>
-    <form action="login_process.php" method="post">
-        <table>
-            <tr>
-                <td>
-                    <input type="text" name="name" placeholder="아이디">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="password" name="password" placeholder="비밀번호">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="로그인">
-                </td>
-            </tr>
-            <tr>
-                <td><a href="create_user.php">회원가입</a></td>
-            </tr>
-        </table>
-    </form>
+<!--  html 전체 영역을 지정하는 container -->
+<div id="container">
+    <!--  login 폼 영역을 : loginBox -->
+    <div id="loginBox">
+        <form action="login_process.php" method="post">
+            <!-- 로그인 페이지 타이틀 -->
+            <div id="loginBoxTitle">Login</div>
+            <!-- 아이디, 비번, 버튼 박스 -->
+                <div id="inputBox">
+                    <div class="input-form-box"><span>아이디 </span><input type="text" name="name" class="form-control"></div>
+                    <div class="input-form-box"><span>비밀번호 </span><input type="password" name="password" class="form-control"></div>
+                    <div class="button-login-box" >
+                    <button type="submit" class="btn btn-primary btn-xs" style="width:100%">로그인</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <?php
