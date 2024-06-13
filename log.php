@@ -77,7 +77,7 @@ function login_log($id){
     $login_ip = $_SERVER['REMOTE_ADDR'];
 
     try{
-        $sql = "insert into login_log values({$login_id}, '{$login_ip}', NOW())";
+        $sql = "insert into login_log(login_id, login_ip, login_time) values({$login_id}, '{$login_ip}', NOW())";
         $result = mysqli_query($conn, $sql);
         if ($result === false) {
             throw new Exception('접속 로그 저장에 실패했습니다: ' . mysqli_error($conn));
