@@ -12,5 +12,9 @@
 </head>
 <body>
     <div>
-        <h2><a href="dashboard.php">dashboard</a> <a href="log_detail.php">log_detail</a></h2>
+        <h2>
+            <a href="dashboard.php">dashboard</a>
+            <a href="access_log.php">access_log</a>
+            <a href="login_log.php">login_log</a>
+        </h2>
     </div>
