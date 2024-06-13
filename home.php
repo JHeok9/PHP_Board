@@ -94,6 +94,11 @@ while($row = mysqli_fetch_array($result)){
 
 <div>
     <h2><a href="home.php">board</a></h2>
+    <?php
+    if($_SESSION['user_id'] == 1){
+        echo "<a href='admin/dashboard.php'>관리자페이지</a>";
+    }
+    ?>
 
      <!-- 검색 -->
     <form action="home.php">
