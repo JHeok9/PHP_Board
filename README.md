@@ -23,5 +23,5 @@
 - create_board_reply_process.php : 댓글 작성
 - file_download.php : 첨부파일 다운로드
 
-  #### 관리자 admin
-  dashboard : 일별 접속로그
+#### 관리자 admin
+- dashboard : 일별 접속로그
