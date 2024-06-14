@@ -10,8 +10,7 @@ if(isset($_GET['category']) && !empty($_GET['search'])){ // 검색시 게시글 
     if($_GET['category'] == 'title'){
         $sql = "select count(*) as count from board where title like '%$filtered_search%'";
     }else{
-        
-        $sql = "select count(*) as count from board b left join user u on b.write_user_id = u.id where u.nickname like '%$$filtered_search%'";
+        $sql = "select count(*) as count from board b left join user u on b.write_user_id = u.id where u.nickname like '%$filtered_search%'";
     }
 }else{ // 전체게시글 카운트
     $sql = "select count(*) as count from board";
@@ -56,20 +55,21 @@ $page_list = '';
 $page_start = max(1, $page - floor($page_num / 2)); // 시작 페이지 번호
 $page_end = min($total_page, $page_start + $page_num - 1); // 끝 페이지 번호
 
+$search_param = isset($_GET['category']) && !empty($filtered_search) ? "&category={$_GET['category']}&search={$filtered_search}" : "";
 if ($page_start > 1) {
-    $page_list .= "<a href='?page=1'>처음</a> ";
+    $page_list .= "<a href='?page=1{$search_param}'>처음</a> ";
 }
 
 for ($i = $page_start; $i <= $page_end; $i++) {
     if ($i == $page) {
         $page_list .= "<strong>$i</strong> ";
     } else {
-        $page_list .= "<a href='?page=$i'>$i</a> ";
+        $page_list .= "<a href='?page=$i{$search_param}'>$i</a> ";
     }
 }
 
 if ($page_end < $total_page) {
-    $page_list .= "<a href='?page=$total_page'>끝</a>";
+    $page_list .= "<a href='?page=$total_page{$search_param}'>끝</a>";
 }
 
 $board_list = '';
