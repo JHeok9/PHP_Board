@@ -2,11 +2,11 @@
 require_once "head.php";
 
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
-$filtered_search = '';
+
+$filtered_search = mysqli_real_escape_string($conn, $_GET['search']);
 
 // 페이징처리
-if(isset($_GET['category']) && !empty($_GET['search'])){ // 검색시 게시글 카운트
-    $filtered_search = mysqli_real_escape_string($conn, $_GET['search']);
+if(isset($_GET['category']) && !empty($filtered_search)){ // 검색시 게시글 카운트
     if($_GET['category'] == 'title'){
         $sql = "select count(*) as count from board where title like '%$filtered_search%'";
     }else{
@@ -28,7 +28,7 @@ $start = ($page - 1) * $list_num;
 $total_page = ceil($board_count / $list_num);
 
 // 게시글 리스트 가져오기
-if(isset($_GET['category']) && !empty($_GET['search'])){ // 검색시
+if(isset($_GET['category']) && !empty($filtered_search)){ // 검색시
     if($_GET['category'] == 'title'){
         $sql = "select b.*, u.nickname 
                   from board b left join user u 
