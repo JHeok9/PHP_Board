@@ -1,6 +1,7 @@
 <?php
 require_once "head.php";
 require_once "log.php";
+access();
 ?>
 
 <!--  html 전체 영역을 지정하는 container -->
