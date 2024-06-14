@@ -10,7 +10,7 @@ drop table login_log;
 CREATE TABLE user
 (
     `id`            INT(11)        NOT NULL    AUTO_INCREMENT COMMENT '회원 ID', 
-    `name`          VARCHAR(50)    NOT NULL    COMMENT '회원 아이디', 
+    `name`          VARCHAR(50)    NOT NULL    unique COMMENT '회원 아이디', 
     `password`      VARCHAR(50)    NOT NULL    COMMENT '회원 비밀번호', 
     `nickname`      VARCHAR(50)    NOT NULL    COMMENT '회원 이름', 
     `user_created`  DATETIME       NOT NULL    COMMENT '가입일', 
@@ -129,3 +129,11 @@ create table login_log(
     `login_ip` varchar(255) not null comment '로그인 ip',
     `login_time` datetime not null comment '로그인 시간'
 );
+
+create table event_log(
+	`id` int(11) auto_increment primary key comment '로그 id',
+    `user_id` int(11) not null comment '유저 ID',
+    `event_ip` varchar(255) not null comment '유저 IP',
+    `evnet_content` varchar(255) not null comment '로그내용',
+    `event_time` datetime not null comment '로그 시간'
+)

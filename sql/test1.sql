@@ -1,13 +1,18 @@
 use test1;
+-- 안전모드해제
+set sql_safe_updates=0;
 
 ALTER TABLE user ADD CONSTRAINT unique_name UNIQUE (name);
 
 delete from user where id =3;
 
+-- 유저 테이블 
 select * from user;
 
 select * from user where name = 'bbb' and password = 'bbb';
 
+
+-- 회원 테이블
 select * from board;
 
 update board set views = views + 1 where id = 1 ;
@@ -20,47 +25,24 @@ select count(*) as count from board where title like '%%';
 select b.*, u.nickname from board b left join user u on b.write_user_id = u.id where title like '%bb%' order by board_created desc limit 0,5;
 
 -- 게시글 작성자검색
-select * from board b left join user u on b.write_user_id = u.id where u.nickname like '%bb%';
 select count(*) as count from board b left join user u on b.write_user_id = u.id where u.nickname like '%test%';
+select b.*, u.nickname from board b left join user u on b.write_user_id = u.id where u.nickname like '%test%' order by board_created desc limit 0,5;
 
-select * from board where id = 1;
-
-select * from board b left join user u on b.create_user_id = u.id where b.id = 7;
-
-
-select b.*, u.name from board b left join user u on b.create_user_id = u.id;
-
-select b.*, u.name from board b left join user u on b.create_user_id = u.id limit 5, 5;
-
+-- 게시글 전체검색
 select b.*, u.name from board b left join user u on b.write_user_id = u.id order by board_created desc limit 0, 5;
 
-select a.*
-  from (select b.*, u.name 
-		  from board b left join user u 
-			on b.write_user_id = u.id 
-		order by board_created desc) a
-limit 10, 5;
 
 
+-- 댓글
 select * from reply;
-
-delete from reply where id = 2;
 
 select * 
   from reply r left join board b 
     on r.board_id = b.id left join user u 
-    on r.user_id = u.id 
- where b.id = 2;
+    on r.reply_user_id = u.id 
+ where b.id = 1;
 
 select r.*, u.nickname from reply r left join board b on r.board_id = b.id left join user u on b.create_user_id = u.id where b.id = 2;
-
-
--- 안전모드해제
-set sql_safe_updates=0;
-
-delete from board_file;
-
-select * from board_file;
 
 
 
@@ -81,3 +63,9 @@ FROM (
 LEFT JOIN access_log a ON DATE(a.access_time) = d.date_range
 GROUP BY d.date_range
 ORDER BY d.date_range;
+
+
+-- 로그인 로그
+select * from login_log;
+
+select * from event_log;
