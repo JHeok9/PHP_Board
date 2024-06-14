@@ -2,7 +2,7 @@
 require_once "include/header.php";
 
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
-$sql = "select * from access_log";
+$sql = "select * from access_log order by access_time desc";
 
 $result = mysqli_query($conn, $sql);
 $logs = array();
