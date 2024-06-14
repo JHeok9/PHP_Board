@@ -90,4 +90,26 @@ function login_log($id){
     mysqli_close($conn);
 }
 
+// 게시글 등록 로그
+function create_board_log($board_id, $user_id){
+    global $conn;
+
+    $event_ip = $_SERVER['REMOTE_ADDR'];
+    $event_content = "글작성 : {$board_id}";
+
+    try{
+        $sql = "insert into event_log (user_id, event_ip, event_content, event_time)
+            values({$user_id}, '{$event_ip}', '{$event_content}', NOW())";
+        $result = mysqli_query($conn, $sql);
+        if($result === false){
+            throw new Exception('접속 로그 저장에 실패했습니다: ' . mysqli_errno($conn));
+        }
+    }catch(Exception $e){
+        echo '오류: ' . $e->getMessage();
+        error_log($e->getMessage());
+    }
+    // DB 연결 종료
+    mysqli_close($conn);
+}
+
 ?>

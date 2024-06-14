@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "log.php";
 // DB연결
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 
@@ -22,6 +23,7 @@ try{
 
     // 등록된 게시글의 ID 가져오기
     $board_id = mysqli_insert_id($conn);
+    create_board_log($board_id,$filtered['write_user_id']);
 
 
     // 파일 업로드 처리
