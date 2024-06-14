@@ -3,7 +3,23 @@ header("Access-Control-Allow-Origin: *"); // 외부 도메인 접근 허용
 header('Content-Type: application/json'); // 응답 헤더를 JSON 형식으로 설정
 
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
-$sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id";
+
+$filtered_search = "";
+$filtered_category = "";
+
+if(isset($_GET['category']) && !empty($_GET['search'])){
+    $filtered_search = mysqli_real_escape_string($conn, $_GET['search']);
+    $filtered_category = mysqli_real_escape_string($conn, $_GET['category']);
+
+    if($filtered_category == 'title'){
+        $sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id where b.title like '%{$filtered_search}%'";
+    }else{
+        $sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id where u.nickname like '%{$filtered_search}%' ";
+    }
+}else{
+    $sql = "select b.*, u.nickname from board b left join user u on b.write_user_id = u.id";
+}
+
 
 $result = mysqli_query($conn, $sql);
 
