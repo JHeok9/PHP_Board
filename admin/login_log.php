@@ -1,21 +1,26 @@
 <?php
 require_once "include/header.php";
+require_once "include/dbconn.php";
+require_once "include/pagination.php";
 
-$conn = mysqli_connect("localhost", "testlink", "12345", "test1");
-$sql = "select * from login_log order by login_time desc";
+$search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
+$page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) : '';
 
-$result = mysqli_query($conn, $sql);
-$logs = array();
+$result = pagination("login_log", $search, $page);
 
 $html = '';
-while($row = mysqli_fetch_assoc($result)) {
+while($row = mysqli_fetch_assoc($result['content_list'])) {
     $html .= "<tr>";
-    $html .= "<td>{$row['login_id']}</td>";
+    $html .= "<td>{$row['id']}</td>";
+    $html .= "<td>{$row['user_id']}</td>";
+    $html .= "<td>{$row['name']}</td>";
+    $html .= "<td>{$row['nickname']}</td>";
     $html .= "<td>{$row['login_ip']}</td>";
     $html .= "<td>{$row['login_time']}</td>";
     $html .= "</tr>";
 }
 
+$page_links = $result['page_list'];
 ?>
 
 <!-- Wrap -->
@@ -26,15 +31,26 @@ while($row = mysqli_fetch_assoc($result)) {
             <!--Content-->
             <div class="tb_row td_center">
                 <caption>로그인 정보</caption>
+                <!-- 검색 -->
+                <form action="login_log.php">
+                    <input type="text" name="search" placeholder="닉네임">
+                    <input type="submit" value="검색">
+                </form>
                 <table class="table table-striped">
                     <colgroup>
                         <col width="5%">
                         <col width="">
                         <col width="">
+                        <col width="">
+                        <col width="">
+                        <col width="">
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>로그인id</th>
+                            <th>번호</th>
+                            <th>유저 번호</th>
+                            <th>유저 ID</th>
+                            <th>닉네임</th>
                             <th>로그인IP</th>
                             <th>로그인시간</th>
                         </tr>
@@ -43,6 +59,10 @@ while($row = mysqli_fetch_assoc($result)) {
                         <?=$html?>
                     </tbody>
                 </table>
+            </div>
+            <!-- 페이지 링크 -->
+            <div>
+                <?=$page_links?>
             </div>
             <!--//Content-->
 

@@ -65,7 +65,7 @@ $result = mysqli_query($conn, $sql);
 while($row = mysqli_fetch_array($result)){
     $reply .= "<tr>";
     $reply .= "<td>{$row['content']}</td>";
-    $reply .= "<td>{$row['nickname']}</td>";
+    $reply .= "<td class = 'table-secondary'>{$row['nickname']}</td>";
     $reply .= "</tr>";
 }
 
@@ -101,17 +101,23 @@ while($row = mysqli_fetch_array($result)){
     </table>
     <br><br>
 
-    <table border="1">
-        <tr>
-            <form action="create_board_reply_process.php" method="post">
-                <td><textarea name="content" placeholder="댓글을 작성해주세요."></textarea></td>
-                <input type="hidden" name="board_id" value="<?=$_GET['id']?>">
-                <input type="hidden" name="reply_user_id" value="<?=$_SESSION['user_id']?>">
-                <td><input type="submit" value="작성"></td>
+    <tr>
+        <form action="create_board_reply_process.php" method="post">
+                <table class="table">
+                    <div class="mb-3">
+                        <textarea class="form-control" name="content" placeholder="댓글을 작성해주세요."></textarea>
+                        <input type="hidden" name="board_id" value="<?=$_GET['id']?>">
+                        <input type="hidden" name="reply_user_id" value="<?=$_SESSION['user_id']?>">
+                        <input class="btn btn-primary btn-xs" type="submit" value="작성">
+                    </div>
+                </table>
             </form>
         </tr>
-        <?=$reply?>
-    </table>
+        <div>
+            <table class="table table-light">
+                <?=$reply?>
+            </table>
+        </div>
 
     <a href="home.php" class="btn btn-outline-secondary">list</a><?=$button?>
 </div>

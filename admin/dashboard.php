@@ -1,6 +1,7 @@
 <?php
 require_once "include/header.php";
-$conn = mysqli_connect("localhost", "testlink", "12345", "test1");
+require_once "include/dbconn.php";
+
 $sql = "SELECT DATE_FORMAT(d.date_range, '%Y-%m-%d') AS log_date,
                COALESCE(COUNT(a.id), 0) AS total_logins
           FROM (

@@ -36,8 +36,8 @@ if ($_SESSION['user_id'] != 1) {
                     <li class="nav-item">
                         <a class="nav-link" href="event_log.php">이벤트로그</a>
                     </li>
-                    
                 </ul>
             </div>
+            <a class="nav-link" href="../home.php">돌아가기</a>
         </div>
     </nav>
