@@ -22,8 +22,6 @@ try{
 
     // 등록된 게시글의 ID 가져오기
     $board_id = mysqli_insert_id($conn);
-    create_board_log($board_id,$filtered['write_user_id']);
-
 
     // 파일 업로드 처리
     if (isset($_FILES["upload_file"]) && $_FILES["upload_file"]["error"] == UPLOAD_ERR_OK) {
@@ -53,17 +51,15 @@ try{
 
                     // 파일 정보 DB에 저장
                     $sql = "insert into board_file (uuid, board_id, file_name, file_created) 
-                            values ('{$new_file_name}', {$board_id}, '{$file_name}', NOW())";
+                            values('{$new_file_name}', {$board_id}, '{$file_name}', NOW())";
+
                     $result = mysqli_query($conn, $sql);
                     if ($result === false) {
                         throw new Exception('파일 정보 저장에 실패했습니다: ' . mysqli_error($conn));
                     }
-
-                    // 트랜잭션 커밋
-                    mysqli_commit($conn);
-
+                   
                     // 등록 성공
-                    header("Location: home.php");
+                    header("Location:../home.php");
                     exit();
                 } else {
                     throw new Exception("파일 업로드 실패.");
@@ -75,6 +71,7 @@ try{
             throw new Exception("지원하지 않는 파일 형식입니다. jpg, jpeg, png, gif 파일만 허용됩니다.");
         }
     }
+    create_board_log($board_id,$filtered['write_user_id']);
     header("Location: ../home.php");
 } catch(Exception $e){
      // 트랜잭션 롤백

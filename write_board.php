@@ -24,7 +24,7 @@ if(isset($_GET['id'])){
     $row =  mysqli_fetch_array($result);
 
     if($row['write_user_id'] == $_SESSION['user_id']){
-        $action_url = "update_board_process.php";
+        $action_url = "board/update_board_process.php";
         $submit_value = '수정';
     
         $board['id'] = htmlspecialchars($row['id']);

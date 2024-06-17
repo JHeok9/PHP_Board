@@ -13,3 +13,14 @@ session_start();
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body class="text-center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <?php
+                    if(isset($_SESSION['user_id'])){
+                        echo '<a class="navbar-brand" href="home.php">Board</a>';
+                        echo '<a class="nav-link" href="/user/logout_process.php">로그아웃</a>';
+                    }
+                ?>
+                
+            </div>
+        </nav>

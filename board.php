@@ -73,7 +73,6 @@ while($row = mysqli_fetch_array($result)){
 ?>
 
 <div>
-    <h2><a href="home.php">board</a></h2>
     <table class="table">
         <tr>
             <td>제목</td>
