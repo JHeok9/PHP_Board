@@ -7,10 +7,6 @@ $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['searc
 $page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) : '';
 
 $result = pagination2("access_log", $search, $page, "access_time");
-// $sql = "select * from access_log order by access_time desc";
-
-// $result = mysqli_query($conn, $sql);
-// $logs = array();
 
 $html = '';
 while($row = mysqli_fetch_assoc($result['content_list'])) {
