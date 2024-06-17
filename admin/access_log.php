@@ -1,14 +1,19 @@
 <?php
 require_once "include/header.php";
 require_once "include/dbconn.php";
+require_once "include/pagination.php";
 
-$sql = "select * from access_log order by access_time desc";
+$search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
+$page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) : '';
 
-$result = mysqli_query($conn, $sql);
-$logs = array();
+$result = pagination2("access_log", $search, $page, "access_time");
+// $sql = "select * from access_log order by access_time desc";
+
+// $result = mysqli_query($conn, $sql);
+// $logs = array();
 
 $html = '';
-while($row = mysqli_fetch_assoc($result)) {
+while($row = mysqli_fetch_assoc($result['content_list'])) {
     $html .= "<tr>";
     $html .= "<td>{$row['id']}</td>";
     $html .= "<td>{$row['access_ip']}</td>";
@@ -19,6 +24,7 @@ while($row = mysqli_fetch_assoc($result)) {
     $html .= "</tr>";
 }
 
+$page_links = $result['page_list'];
 ?>
 
 <!-- Wrap -->
@@ -52,6 +58,10 @@ while($row = mysqli_fetch_assoc($result)) {
                         <?=$html?>
                     </tbody>
                 </table>
+            </div>
+            <!-- 페이지 링크 -->
+            <div>
+                <?=$page_links?>
             </div>
             <!--//Content-->
 

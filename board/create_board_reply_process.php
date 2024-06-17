@@ -1,7 +1,6 @@
 <?php
 session_start();
-// DB연결
-$conn = mysqli_connect("localhost", "testlink", "12345", "test1");
+require_once "../common/dbconn.php";
 
 // 댓글 데이터 필터
 $filtered = array(
@@ -21,7 +20,7 @@ try{
     }
 
     // 등록 성공
-    header("Location: board.php?id={$filtered['board_id']}");
+    header("Location: ../board.php?id={$filtered['board_id']}");
 } catch(Exception $e){
     // 등록 실패
     echo '등록 실패: ' . $e->getMessage();

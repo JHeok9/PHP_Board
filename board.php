@@ -32,7 +32,7 @@ if(isset($_GET['id'])){
 
     if($row['write_user_id'] == $_SESSION['user_id']){
         $button = "<a href='write_board.php?id={$filtered_id}' class='btn btn-outline-secondary'>modify</a>";
-        $button .= "<a href='delete_board_process.php?id={$filtered_id}' class='btn btn-outline-secondary' onclick='return confirm(\"삭제하시겠습니까?\")'>delete</a>";
+        $button .= "<a href='board/delete_board_process.php?id={$filtered_id}' class='btn btn-outline-secondary' onclick='return confirm(\"삭제하시겠습니까?\")'>delete</a>";
         // $button .= '<form action="delete_board_process.php" method="post"><input type="hidden" name="id" value="'.$row['id'].'"><input type="submit" class="btn btn-outline-secondary" value="delete"></form>';
     }
 }
@@ -64,8 +64,9 @@ $sql = "select r.*, u.nickname
 $result = mysqli_query($conn, $sql);
 while($row = mysqli_fetch_array($result)){
     $reply .= "<tr>";
-    $reply .= "<td>{$row['content']}</td>";
     $reply .= "<td class = 'table-secondary'>{$row['nickname']}</td>";
+    $reply .= "<td>{$row['content']}</td>";
+    $reply .= "<td class = 'table-secondary'>{$row['reply_created']}</td>";
     $reply .= "</tr>";
 }
 
@@ -102,19 +103,26 @@ while($row = mysqli_fetch_array($result)){
     <br><br>
 
     <tr>
-        <form action="create_board_reply_process.php" method="post">
+        <form action="board/create_board_reply_process.php" method="post">
                 <table class="table">
-                    <div class="mb-3">
-                        <textarea class="form-control" name="content" placeholder="댓글을 작성해주세요."></textarea>
-                        <input type="hidden" name="board_id" value="<?=$_GET['id']?>">
-                        <input type="hidden" name="reply_user_id" value="<?=$_SESSION['user_id']?>">
-                        <input class="btn btn-primary btn-xs" type="submit" value="작성">
-                    </div>
+                    <input type="hidden" name="board_id" value="<?=$_GET['id']?>">
+                    <input type="hidden" name="reply_user_id" value="<?=$_SESSION['user_id']?>">
+                    <colgroup>
+                        <col width="85%">
+                        <col width="15%">
+                    </colgroup>
+                    <td><textarea class="form-control" name="content" placeholder="댓글을 작성해주세요."></textarea></td>
+                    <td><input class="btn btn-primary btn-xs" type="submit" value="댓글작성"></td>
                 </table>
             </form>
         </tr>
         <div>
             <table class="table table-light">
+                <colgroup>
+                    <col width="10%">
+                    <col width="">
+                    <col width="20%">
+                </colgroup>
                 <?=$reply?>
             </table>
         </div>

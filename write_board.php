@@ -4,7 +4,7 @@ require_once "head.php";
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 
 // 게시,수정에 따른 form태그 변경사항
-$action_url = 'create_board_process.php';
+$action_url = 'board/create_board_process.php';
 $submit_value = '게시';
 
 $board = array(

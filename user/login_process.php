@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "log.php";
+require_once "../log.php";
 // DB연결
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 
@@ -20,7 +20,7 @@ try{
         // 로그인 성공
         $_SESSION['user_id'] = $row['id']; // 세션에 유저 ID 저장
         login_log($row['id']);
-        header("Location: home.php");
+        header("Location: ../home.php");
         exit();
     }else{
         throw new Exception('로그인에 실패했습니다: ' . mysqli_error($conn));

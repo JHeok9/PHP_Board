@@ -19,7 +19,7 @@ if(isset($_GET['category']) && !empty($_GET['search'])){ // 검색시 게시글 
 $result = mysqli_query($conn, $sql);
 $board_count = mysqli_fetch_array($result)['count'];
 
-$list_num = 5; // 한 페이지에 보여줄 게시글 수
+$list_num = 10; // 한 페이지에 보여줄 게시글 수
 $page_num = 5; // 페이지 번호를 몇 개까지 보여줄지 설정
 $page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) : 1;
 $start = ($page - 1) * $list_num;

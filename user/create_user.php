@@ -1,6 +1,5 @@
 <?php
-// DB연결
-$conn = mysqli_connect("localhost", "testlink", "12345", "test1");
+require_once "../common/dbconn.php";
 
 // 회원가입 데이터 필터
 $filtered = array(
@@ -21,10 +20,11 @@ try{
     }
 
     // 회원가입 성공
-    echo '회원가입 성공 <a href="index.php">돌아가기</a>';
+    echo '회원가입 성공 <a href="../index.php">돌아가기</a>';
 } catch(Exception $e){
     // 회원가입 실패
     echo '회원가입 실패: ' . $e->getMessage();
     error_log($e->getMessage());
 }
+
 ?>

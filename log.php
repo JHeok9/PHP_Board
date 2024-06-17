@@ -1,6 +1,5 @@
 <?php
-// DB 연결
-$conn = mysqli_connect("localhost", "testlink", "12345", "test1");
+require "common/dbconn.php";
 
 // 접속 로그
 function access(){

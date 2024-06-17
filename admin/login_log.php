@@ -6,7 +6,7 @@ require_once "include/pagination.php";
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 $page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) : '';
 
-$result = pagination("login_log", $search, $page);
+$result = pagination("login_log", $search, $page, "login_time");
 
 $html = '';
 while($row = mysqli_fetch_assoc($result['content_list'])) {
@@ -33,7 +33,7 @@ $page_links = $result['page_list'];
                 <caption>로그인 정보</caption>
                 <!-- 검색 -->
                 <form action="login_log.php">
-                    <input type="text" name="search" placeholder="닉네임">
+                    <input type="text" name="search" placeholder="유저ID">
                     <input type="submit" value="검색">
                 </form>
                 <table class="table table-striped">

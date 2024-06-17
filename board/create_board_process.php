@@ -1,8 +1,7 @@
 <?php
 session_start();
-require_once "log.php";
-// DB연결
-$conn = mysqli_connect("localhost", "testlink", "12345", "test1");
+require_once "../common/dbconn.php";
+require_once "../log.php";
 
 // 게시글 데이터 필터
 $filtered = array(
@@ -28,7 +27,7 @@ try{
 
     // 파일 업로드 처리
     if (isset($_FILES["upload_file"]) && $_FILES["upload_file"]["error"] == UPLOAD_ERR_OK) {
-        $upload_dir = "boardFile/"; // 업로드 경로
+        $upload_dir = "../boardFile/"; // 업로드 경로
         $max_file_size = 5 * 1024 * 1024; // 5MB
 
         // 업로드된 파일 정보 가져오기
@@ -76,7 +75,7 @@ try{
             throw new Exception("지원하지 않는 파일 형식입니다. jpg, jpeg, png, gif 파일만 허용됩니다.");
         }
     }
-    header("Location: home.php");
+    header("Location: ../home.php");
 } catch(Exception $e){
      // 트랜잭션 롤백
      mysqli_rollback($conn);

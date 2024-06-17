@@ -3,7 +3,7 @@ require_once "head.php";
 ?>
 
 <div>
-    <form action="create_user_process.php" method="post">
+    <form action="user/create_user.php" method="post">
         <table>
             <tr>
                 <td>
