@@ -1,7 +1,7 @@
 <?php
 session_start();
-// DB연결
-$conn = mysqli_connect("localhost", "testlink", "12345", "test1");
+require_once "../common/dbconn.php";
+require_once "../common/log.php";
 
 // 게시글 데이터 필터
 $filtered = array(
@@ -20,7 +20,9 @@ try{
     }
 
     // 수정 성공
-    header("Location: board.php?id={$filtered['id']}");
+    // 로그
+    create_board_log("글수정", $filtered['id'], $_SESSION['user_id']);
+    header("Location: ../board.php?id={$filtered['id']}");
 } catch(Exception $e){
     // 등록 실패
     echo '등록 실패: ' . $e->getMessage();

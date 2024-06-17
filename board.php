@@ -96,7 +96,7 @@ while($row = mysqli_fetch_array($result)){
         </tr>
         <tr>
             <td>첨부파일</td>
-            <td><a href="file_download.php?uuid=<?=$board_file['uuid']?>&file_name=<?=$board_file['file_name']?>"><?=$board_file['file_name']?></a></td>
+            <td><a href="board/file_download.php?uuid=<?=$board_file['uuid']?>&file_name=<?=$board_file['file_name']?>"><?=$board_file['file_name']?></a></td>
         </tr>
     </table>
     <br><br>

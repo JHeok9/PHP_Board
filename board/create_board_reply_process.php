@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../common/dbconn.php";
+require_once "../common/log.php";
 
 // 댓글 데이터 필터
 $filtered = array(

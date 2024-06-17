@@ -1,6 +1,6 @@
 <?php
 require_once "head.php";
-require_once "log.php";
+require_once "common/log.php";
 access();
 ?>
 

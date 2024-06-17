@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../log.php";
+require_once "../common/log.php";
 // DB연결
 $conn = mysqli_connect("localhost", "testlink", "12345", "test1");
 

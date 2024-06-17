@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "../common/dbconn.php";
-require_once "../log.php";
+require_once "../common/log.php";
 
 // 게시글 데이터 필터
 $filtered = array(
@@ -71,7 +71,8 @@ try{
             throw new Exception("지원하지 않는 파일 형식입니다. jpg, jpeg, png, gif 파일만 허용됩니다.");
         }
     }
-    create_board_log($board_id,$filtered['write_user_id']);
+    //로그
+    create_board_log("글작성", $board_id, $filtered['write_user_id']);
     header("Location: ../home.php");
 } catch(Exception $e){
      // 트랜잭션 롤백

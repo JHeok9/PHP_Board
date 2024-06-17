@@ -1,5 +1,5 @@
 <?php
-require "common/dbconn.php";
+require "dbconn.php";
 
 // 접속 로그
 function access(){
@@ -89,12 +89,12 @@ function login_log($id){
     mysqli_close($conn);
 }
 
-// 게시글 등록 로그
-function create_board_log($board_id, $user_id){
+// 게시글 로그
+function create_board_log($log_type, $board_id, $user_id){
     global $conn;
 
     $event_ip = $_SERVER['REMOTE_ADDR'];
-    $event_content = "글작성 : {$board_id}";
+    $event_content = "$log_type : $board_id";
 
     try{
         $sql = "insert into event_log (user_id, event_ip, event_content, event_time)

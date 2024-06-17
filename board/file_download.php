@@ -1,5 +1,5 @@
 <?php
-$upload_dir = "boardFile/"; // 업로드 경로
+$upload_dir = "../boardFile/"; // 업로드 경로
 
 // 파일명 검증 및 정리
 if (!isset($_GET['uuid']) || !isset($_GET['file_name'])) {
