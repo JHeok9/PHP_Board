@@ -54,7 +54,7 @@ function access(){
 
     // 접속 로그 DB에 저장
     try {
-        $sql = "INSERT INTO access_log (access_ip, access_time, access_browser, access_os, access_route) 
+        $sql = "INSERT INTO access_log (access_ip, log_time, access_browser, access_os, access_route) 
                 VALUES ('{$filtered['access_ip']}', NOW(), '{$filtered['access_browser']}', '{$filtered['access_os']}', '{$filtered['access_route']}')";
         $result = mysqli_query($conn, $sql);
         if ($result === false) {
@@ -72,11 +72,11 @@ function access(){
 function login_log($id){
     global $conn;
 
-    $login_id = $id;
+    $user_id = $id;
     $login_ip = $_SERVER['REMOTE_ADDR'];
 
     try{
-        $sql = "insert into login_log(login_id, login_ip, login_time) values({$login_id}, '{$login_ip}', NOW())";
+        $sql = "insert into login_log(user_id, login_ip, log_time) values({$user_id}, '{$login_ip}', NOW())";
         $result = mysqli_query($conn, $sql);
         if ($result === false) {
             throw new Exception('접속 로그 저장에 실패했습니다: ' . mysqli_error($conn));
@@ -97,7 +97,7 @@ function create_board_log($log_type, $board_id, $user_id){
     $event_content = "$log_type : $board_id";
 
     try{
-        $sql = "insert into event_log (user_id, event_ip, event_content, event_time)
+        $sql = "insert into event_log (user_id, event_ip, event_content, log_time)
             values({$user_id}, '{$event_ip}', '{$event_content}', NOW())";
         $result = mysqli_query($conn, $sql);
         if($result === false){
