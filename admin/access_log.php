@@ -3,17 +3,14 @@ require_once "include/header.php";
 require_once "include/dbconn.php";
 require_once "include/pagination.php";
 
-$search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
-$page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) : '';
-
-$result = pagination2("access_log", $search, $page, "access_time");
+$result = pagination2("access_log", $search, $page, $start_date, $end_date);
 
 $html = '';
 while($row = mysqli_fetch_assoc($result['content_list'])) {
     $html .= "<tr>";
     $html .= "<td>{$row['id']}</td>";
     $html .= "<td>{$row['access_ip']}</td>";
-    $html .= "<td>{$row['access_time']}</td>";
+    $html .= "<td>{$row['log_time']}</td>";
     $html .= "<td>{$row['access_browser']}</td>";
     $html .= "<td>{$row['access_os']}</td>";
     $html .= "<td>{$row['access_route']}</td>";
@@ -31,6 +28,13 @@ $page_links = $result['page_list'];
             <!--Content-->
             <div class="tb_row td_center">
                 <caption>접속 정보</caption>
+                <!-- 검색 -->
+                <form action="access_log.php">
+                    <input type="date" name="start_date">
+                    <span> ~ </span>
+                    <input type="date" name="end_date">
+                    <input type="submit" value="검색">
+                </form>
                 <table class="table table-striped">
                     <colgroup>
                         <col width="5%">
