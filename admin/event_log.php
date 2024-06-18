@@ -3,10 +3,7 @@ require_once "include/header.php";
 require_once "include/dbconn.php";
 require_once "include/pagination.php";
 
-$search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
-$page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) : '';
-
-$result = pagination("event_log", $search, $page, "event_time");
+$result = pagination("event_log", $where_sql, $page);
 
 $html = '';
 while($row = mysqli_fetch_assoc($result['content_list'])) {
@@ -17,7 +14,7 @@ while($row = mysqli_fetch_assoc($result['content_list'])) {
     $html .= "<td>{$row['nickname']}</td>";
     $html .= "<td>{$row['event_ip']}</td>";
     $html .= "<td>{$row['event_content']}</td>";
-    $html .= "<td>{$row['event_time']}</td>";
+    $html .= "<td>{$row['log_time']}</td>";
     $html .= "</tr>";
 }
 
@@ -34,6 +31,10 @@ $page_links = $result['page_list'];
                 <caption>이벤트 로그</caption>
                 <!-- 검색 -->
                 <form action="login_log.php">
+                    <input type="date" name="start_date">
+                    <span> ~ </span>
+                    <input type="date" name="end_date">
+                    <br>
                     <input type="text" name="search" placeholder="유저ID">
                     <input type="submit" value="검색">
                 </form>
