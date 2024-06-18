@@ -3,7 +3,7 @@ require_once "include/header.php";
 require_once "include/dbconn.php";
 require_once "include/pagination.php";
 
-$result = pagination("login_log", $where_sql, $page);
+$result = pagination("login_log", $search, $page, $start_date, $end_date);
 
 $html = '';
 while($row = mysqli_fetch_assoc($result['content_list'])) {

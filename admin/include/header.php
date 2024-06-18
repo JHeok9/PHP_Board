@@ -1,34 +1,16 @@
 <?php
 session_start();
 require_once "dbconn.php";
+
 if ($_SESSION['user_id'] != 1) {
     header("Location: ../home.php");
 }
 
-// 검색
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 $page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) : '';
 $start_date = isset($_GET['start_date']) ? mysqli_real_escape_string($conn, $_GET['start_date']) : '';
 $end_date = isset($_GET['end_date']) ? mysqli_real_escape_string($conn, $_GET['end_date']) : '';
 
-$where_conditions = [];
-
-if (!empty($search)) {
-    $where_conditions[] = "u.nickname LIKE '%$search%'";
-}
-
-if (!empty($start_date)) {
-    $where_conditions[] = "log_time >= '$start_date'";
-}
-
-if (!empty($end_date)) {
-    $where_conditions[] = "log_time <= '$end_date'";
-}
-
-$where_sql = "";
-if (count($where_conditions) > 0) {
-    $where_sql = "WHERE " . implode(" AND ", $where_conditions);
-}
 ?>
 <!doctype html>
 <html lang="ko">
