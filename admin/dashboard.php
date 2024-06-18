@@ -11,7 +11,7 @@ $sql = "SELECT DATE_FORMAT(d.date_range, '%Y-%m-%d') AS log_date,
                     UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
                     ) n
                 ) d
-        LEFT JOIN access_log a ON DATE(a.access_time) = d.date_range
+        LEFT JOIN access_log a ON DATE(a.log_time) = d.date_range
         GROUP BY d.date_range
         ORDER BY d.date_range";
 
