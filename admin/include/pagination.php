@@ -1,8 +1,8 @@
 <?php
 require_once "dbconn.php";
 
-
-function pagination($table, $search, $page, $time){
+// 로그인,이벤트 로그
+function pagination($table, $where_sql, $page){
     global $conn;
 
     $list_num = 10; // 한 페이지에 보여줄 게시글 수
@@ -10,13 +10,8 @@ function pagination($table, $search, $page, $time){
     $page = !empty($page) ? $page : 1;
     $start = ($page - 1) * $list_num;
 
-    if(!empty($search)){
-        $count_sql = "select count(*) as count from $table t left join user u on t.user_id = u.id where u.nickname like '%$search%'";
-        $list_sql = "select t.*, u.name, u.nickname from $table t left join user u on t.user_id = u.id where u.nickname like '%$search%' order by $time desc limit $start, $list_num";
-    } else {
-        $count_sql = "select count(*) as count from $table";
-        $list_sql = "select t.*, u.name, u.nickname from $table t left join user u on t.user_id = u.id order by $time desc limit $start, $list_num";
-    }
+    $count_sql = "SELECT COUNT(*) AS count FROM $table t LEFT JOIN user u ON t.user_id = u.id $where_sql";
+    $list_sql = "SELECT t.*, u.name, u.nickname FROM $table t LEFT JOIN user u ON t.user_id = u.id $where_sql ORDER BY log_time DESC LIMIT $start, $list_num";
     
     $count = mysqli_query($conn, $count_sql);
     $board_count = mysqli_fetch_array($count)['count'];
@@ -54,7 +49,8 @@ function pagination($table, $search, $page, $time){
            ];
 }
 
-function pagination2($table, $search, $page, $time){
+// 접속 로그
+function pagination2($table, $search, $page, $date_query){
     global $conn;
 
     $list_num = 10; // 한 페이지에 보여줄 게시글 수
@@ -64,10 +60,10 @@ function pagination2($table, $search, $page, $time){
 
     if(!empty($search)){
         $count_sql = "select count(*) as count from $table";
-        $list_sql = "select t.* from $table t order by $time desc limit $start, $list_num";
+        $list_sql = "select t.* from $table t order by log_time desc limit $start, $list_num";
     } else {
         $count_sql = "select count(*) as count from $table";
-        $list_sql = "select t.* from $table t order by $time desc limit $start, $list_num";
+        $list_sql = "select t.* from $table t order by log_time desc limit $start, $list_num";
     }
     
     $count = mysqli_query($conn, $count_sql);
