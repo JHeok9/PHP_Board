@@ -19,17 +19,6 @@ while($row = mysqli_fetch_assoc($result['content_list'])) {
 }
 
 $page_links = $result['page_list'];
-
-$down_load_param = "";
-if(!empty($search)){
-    $down_load_param .= "&search=$search";
-}
-if(!empty($start_date)){
-    $down_load_param .= "&start_date=$start_date";
-}
-if(!empty($end_date)){
-    $down_load_param .= "&end_date=$end_date";
-}
 ?>
 
 <!-- Wrap -->
@@ -49,7 +38,7 @@ if(!empty($end_date)){
                     <input type="text" name="search" placeholder="유저ID">
                     <input type="submit" value="검색">
                 </form>
-                <a href="include/excel_download.php?type=all&table=event_log<?=$down_load_param?>">엑셀다운로드</a>
+                <a class="btn btn-primary" href="include/excel_download.php?type=all&table=event_log<?=$down_load_param?>">엑셀다운로드</a>
                 <table class="table table-striped">
                     <colgroup>
                         <col width="5%">

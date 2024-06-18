@@ -11,6 +11,17 @@ $page = isset($_GET['page']) ? mysqli_real_escape_string($conn, $_GET['page']) :
 $start_date = isset($_GET['start_date']) ? mysqli_real_escape_string($conn, $_GET['start_date']) : '';
 $end_date = isset($_GET['end_date']) ? mysqli_real_escape_string($conn, $_GET['end_date']) : '';
 
+$down_load_param = "";
+if(!empty($search)){
+    $down_load_param .= "&search=$search";
+}
+if(!empty($start_date)){
+    $down_load_param .= "&start_date=$start_date";
+}
+if(!empty($end_date)){
+    $down_load_param .= "&end_date=$end_date";
+}
+
 ?>
 <!doctype html>
 <html lang="ko">

@@ -37,6 +37,7 @@ $page_links = $result['page_list'];
                     <input type="text" name="search" placeholder="유저ID">
                     <input type="submit" value="검색">
                 </form>
+                <a class="btn btn-primary" href="include/excel_download.php?type=all&table=login_log<?=$down_load_param?>">엑셀다운로드</a>
                 <table class="table table-striped">
                     <colgroup>
                         <col width="5%">
