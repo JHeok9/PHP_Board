@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// 로그인 아닐시 로그인페이지로 이동
+$current_page = basename($_SERVER['PHP_SELF']);
+if ($current_page !== 'index.php' && empty($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="ko">
