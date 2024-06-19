@@ -1,26 +1,8 @@
 <?php
 require_once "include/header.php";
 require_once "include/dbconn.php";
+require_once "include/dashboard_info.php";
 
-$sql = "SELECT DATE_FORMAT(d.date_range, '%Y-%m-%d') AS log_date,
-               COALESCE(COUNT(a.id), 0) AS total_logins
-          FROM (
-                SELECT CURDATE() - INTERVAL (n.n) DAY AS date_range
-                FROM (
-                    SELECT 0 as n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 
-                    UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
-                    ) n
-                ) d
-        LEFT JOIN access_log a ON DATE(a.log_time) = d.date_range
-        GROUP BY d.date_range
-        ORDER BY d.date_range";
-
-$result = mysqli_query($conn, $sql);
-$logs = array();
-
-while($row = mysqli_fetch_assoc($result)) {
-    $logs[] = $row;
-}
 ?>
 
 <!-- Wrap -->
@@ -41,6 +23,7 @@ while($row = mysqli_fetch_assoc($result)) {
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
         <script type="text/javascript">
+          // 일별접속자 그래프 차트
           // PHP에서 가져온 데이터를 JavaScript로 전달
           var logs = <?php echo json_encode($logs); ?>;
 
@@ -122,6 +105,8 @@ while($row = mysqli_fetch_assoc($result)) {
               },
             }
           );
+
+
         </script>    
       </div>
       <!--//Content-->
