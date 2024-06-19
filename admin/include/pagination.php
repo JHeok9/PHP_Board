@@ -22,6 +22,7 @@ function pagination($table, $search, $page, $start_date, $end_date){
    }
 
    if (!empty($end_date)) {
+       $end_date .= ' 23:59:59';
        $where_conditions[] = "log_time <= '$end_date'";
    }
 
