@@ -113,7 +113,7 @@ CREATE TABLE access_log
 (
     `id`              INT(11)         NOT NULL    AUTO_INCREMENT COMMENT '로그 ID', 
     `access_ip`       VARCHAR(255)    NOT NULL    COMMENT '접속 IP', 
-    `access_time`     DATETIME		  NOT NULL    COMMENT '접속 시간', 
+    `log_time`     DATETIME		  NOT NULL    COMMENT '접속 시간', 
     `access_browser`  VARCHAR(255)    NULL        COMMENT '브라우저', 
     `access_os`       VARCHAR(255)    NULL        COMMENT '운영체제', 
     `access_route`    VARCHAR(255)    NULL        COMMENT '접근 경로', 
@@ -125,15 +125,16 @@ CREATE TABLE access_log
 -- 로그인 로그 테이블 생성 - login_log
 create table login_log(
 	`id` int(11) auto_increment primary key comment '로그 id',
-    `login_id` int(11) not null comment '로그인 유저 id',
+    `user_id` int(11) not null comment '로그인 유저 id',
     `login_ip` varchar(255) not null comment '로그인 ip',
-    `login_time` datetime not null comment '로그인 시간'
+    `log_time` datetime not null comment '로그인 시간'
 );
 
+-- 이벤트 로그 테이블 생성 - event_log
 create table event_log(
 	`id` int(11) auto_increment primary key comment '로그 id',
     `user_id` int(11) not null comment '유저 ID',
     `event_ip` varchar(255) not null comment '유저 IP',
     `evnet_content` varchar(255) not null comment '로그내용',
-    `event_time` datetime not null comment '로그 시간'
+    `log_time` datetime not null comment '로그 시간'
 )

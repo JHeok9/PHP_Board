@@ -13,7 +13,13 @@ select * from user where name = 'bbb' and password = 'bbb';
 
 
 -- 회원 테이블
-select * from board;
+
+
+
+-- 게시판
+select * from board order by board_created desc;
+select * from board_file;
+delete from board where id = 52;
 
 update board set views = views + 1 where id = 1 ;
 
@@ -46,8 +52,17 @@ select r.*, u.nickname from reply r left join board b on r.board_id = b.id left 
 
 
 
+
+
 -- 로 그
-select * from access_log;
+select * from access_log order by access_time desc;
+
+SELECT * 
+FROM access_log 
+WHERE access_time >= '2024-06-17 16:32:00';
+
+delete from access_log where access_time >= '2024-06-17 16:32:00';
+commit;
 
 -- 일별 접속로그
 SELECT 
@@ -69,3 +84,24 @@ ORDER BY d.date_range;
 select * from login_log;
 
 select * from event_log;
+
+
+-- login_log 컬럼이름 변경
+ALTER TABLE login_log CHANGE login_id user_id int(11) NOT NULL COMMENT '로그인 유저 id';
+
+describe login_log;
+
+
+-- 이벤트로그
+select t.*, u.name, u.nickname from event_log t left join user u on t.user_id = u.id order by t.event_time limit 0,5 ;
+
+
+
+-- access_log 테이블의 access_time을 log_time으로 변경
+ALTER TABLE access_log CHANGE access_time log_time DATETIME NOT NULL COMMENT '로그 시간';
+
+-- login_log 테이블의 login_time을 log_time으로 변경
+ALTER TABLE login_log CHANGE login_time log_time DATETIME NOT NULL COMMENT '로그 시간';
+
+-- event_log 테이블의 event_time을 log_time으로 변경
+ALTER TABLE event_log CHANGE event_time log_time DATETIME NOT NULL COMMENT '로그 시간';
