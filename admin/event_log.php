@@ -31,11 +31,11 @@ $page_links = $result['page_list'];
                 <caption>이벤트 로그</caption>
                 <!-- 검색 -->
                 <form action="event_log.php">
-                    <input type="date" name="start_date">
+                    <input type="date" name="start_date" value="<?=$start_date?>">
                     <span> ~ </span>
-                    <input type="date" name="end_date">
+                    <input type="date" name="end_date" value="<?=$end_date?>">
                     <br>
-                    <input type="text" name="search" placeholder="유저ID">
+                    <input type="text" name="search" placeholder="유저ID" value="<?=$search?>">
                     <input type="submit" value="검색">
                 </form>
                 <a class="btn btn-primary" href="include/excel_download.php?type=all&table=event_log<?=$down_load_param?>">엑셀다운로드</a>
