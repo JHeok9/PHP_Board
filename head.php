@@ -25,7 +25,7 @@ if ($current_page !== 'index.php' && empty($_SESSION['user_id'])) {
                 <?php
                     if(isset($_SESSION['user_id'])){
                         echo '<a class="navbar-brand" href="home.php">Board</a>';
-                        echo '<a class="nav-link" href="/user/logout_process.php">로그아웃</a>';
+                        echo '<a class="nav-link" href="user/logout_process.php">로그아웃</a>';
                     }
                 ?>
                 
